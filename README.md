@@ -1,1 +1,3 @@
 # JS-Snake
+
+Thomas Soria
