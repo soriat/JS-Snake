@@ -5,8 +5,8 @@ function Food() {
    this.colors = shadesOf('red');
 
    this.pickLocation = function() {
-      var cols = canvas.width / blockSize;
-      var rows = canvas.height / blockSize;
+      var cols = canvas.width / settings.blockSize;
+      var rows = canvas.height / settings.blockSize;
 
       while (1) {
          var pos = createVector(
@@ -29,26 +29,26 @@ function Food() {
 
       //strokeWeight(3);
       //ellipse(
-         //ceil(this.x * blockSize + blockSize/2),
-         //ceil(this.y * blockSize + blockSize/2),
-         //ceil(blockSize/1.35),
-         //ceil(blockSize/1.35)
+         //ceil(this.x * settings.blockSize + settings.blockSize/2),
+         //ceil(this.y * settings.blockSize + settings.blockSize/2),
+         //ceil(settings.blockSize/1.35),
+         //ceil(settings.blockSize/1.35)
       //);
-      rect(this.x * blockSize, this.y * blockSize, blockSize, blockSize);
+      rect(this.x * settings.blockSize, this.y * settings.blockSize, settings.blockSize, settings.blockSize);
       //stroke(0);
 
-      var x = this.x * blockSize;
-      var y = (this.y + 1) * blockSize;
+      var x = this.x * settings.blockSize;
+      var y = (this.y + 1) * settings.blockSize;
 
       // |\
       //triangle(x, y,
-               //x, y - blockSize,
-               //x + blockSize, y);
+               //x, y - settings.blockSize,
+               //x + settings.blockSize, y);
 
       // /|
-      //triangle(x + blockSize, y - blockSize,
-               //x, y - blockSize,
-               //x + blockSize, y);
+      //triangle(x + settings.blockSize, y - settings.blockSize,
+               //x, y - settings.blockSize,
+               //x + settings.blockSize, y);
 
    }
 }

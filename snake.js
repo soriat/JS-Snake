@@ -120,7 +120,7 @@ function Snake() {
       this.x = newHead.x;
       this.y = newHead.y;
 
-      if (loopEnabled) {
+      if (settings.loopEnabled) {
          if (this.x < 0) {
             this.x = game.cols - 1;
          }
@@ -148,13 +148,13 @@ function Snake() {
 
    this.draw = function() {
       var i = 0;
-      fill(colors[i]);
+      fill(settings.colors[i]);
       this.tail.forEach(function(element) {
-         fill(colors[i]);
-         rect(element.x * blockSize, element.y * blockSize, blockSize, blockSize);
-         i = (i + 1) % colors.length;
+         fill(settings.colors[i]);
+         rect(element.x * settings.blockSize, element.y * settings.blockSize, settings.blockSize, settings.blockSize);
+         i = (i + 1) % settings.colors.length;
       }, this);
 
-      rect(this.x * blockSize, this.y * blockSize, blockSize, blockSize);
+      rect(this.x * settings.blockSize, this.y * settings.blockSize, settings.blockSize, settings.blockSize);
    }
 }

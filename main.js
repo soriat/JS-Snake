@@ -4,7 +4,8 @@ var game;
 var food;
 
 function setup() {
-   parseParams();
+   settings = new Settings();
+   settings.parseParams();
 
    game = new Game();
    snake = new Snake();
@@ -52,20 +53,18 @@ function keyPressed() {
 }
 
 function draw() {
+   strokeWeight(settings.borderWidth);
    background(20);
 
    if (game.state == 'Menu') {
       game.drawMenu();
    } else {
-      if (game.currentFrame % gameSpeed === 0) {
-         if (!game.paused) {
-            snake.update();
-         }
+      if (!game.paused && game.currentFrame % settings.gameSpeed === 0) {
+         snake.update();
       }
 
       food.draw();
       snake.draw();
-      strokeWeight(1);
       grid.draw();
    }
 

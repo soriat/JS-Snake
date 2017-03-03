@@ -10,16 +10,14 @@ function Grid() {
          return;
       }
 
-      var cols = width/blockSize;
-      //console.log(width, blockSize, width/blockSize);
+      var cols = width/settings.blockSize;
       for (var i = 0; i < cols; i++) {
-         line(i * blockSize, 0, i * blockSize, height);
+         line(i * settings.blockSize, 0, i * settings.blockSize, height);
       }
 
-      var rows = height/blockSize;
-      //console.log(rows, blockSize, rows/blockSize);
+      var rows = height/settings.blockSize;
       for (var i = 0; i < rows; i++) {
-         line(0, i * blockSize, width,  i * blockSize);
+         line(0, i * settings.blockSize, width,  i * settings.blockSize);
       }
    }
 }

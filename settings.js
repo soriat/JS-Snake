@@ -1,31 +1,61 @@
-var blockSize = 25;
-var gameSpeed = 15;
-var loopEnabled = false;
-var colors = [];
+function Settings() {
+   this.blockSize = 15;
+   this.gameSpeed = 3;
+   this.loopEnabled = true;
+   this.colors = rainbow();
+   this.borderWidth = 2;
 
-function parseParams() {
-   // Set values from URI parameters.
-   location.search.substr(1).split("&").forEach(function(param) {
-      var pair = param.split("=");
-      if (pair.length !== 2) {
-         return;
+   this.parseParams = function() {
+      // Set values from URI parameters.
+      location.search.substr(1).split("&").forEach(function(param) {
+         var pair = param.split("=");
+         if (pair.length !== 2) {
+            return;
+         }
+
+         var value = decodeURIComponent(pair[1]);
+         switch(pair[0]) {
+         case 'theme':
+            this.setTheme(value);
+            return;
+         case 'loop':
+            this.loopEnabled = isTruthy(value);
+            return;
+         case 'borderWidth':
+            this.borderWidth = enforceInt(value, 2);
+            return;
+         case 'blocksize':
+            this.blockSize = enforceInt(value, 25);
+            return;
+         case 'speed':
+            this.gameSpeed = enforceInt(value, 15);
+            return;
+         }
+      }.bind(this));
+
+      this.updateParams();
+   }
+
+   this.updateParams = function() {
+
+   }
+
+   this.setTheme = function(theme) {
+      switch(theme) {
+         case 'rainbow':
+            this.colors = rainbow();
+            break;
+         case 'pastel':
+            this.colors = pastel();
+            break;
+         case 'red':
+         case 'green':
+         case 'blue':
+         case 'purple':
+         case 'yellow':
+         case 'cyan':
+            this.colors = shadesOf(theme);
+            break;
       }
-
-      var value = decodeURIComponent(pair[1]);
-      switch(pair[0]) {
-      case 'loop':
-         loopEnabled = isTruthy(value);
-         return;
-      case 'bs':
-         blockSize = enforceInt(value, 25);
-         return;
-      case 's':
-         gameSpeed = enforceInt(value, 15);
-         return;
-      }
-
-      //updateGetParams();
-   });
-
-   colors = pastel();
+   }
 }

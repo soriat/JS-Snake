@@ -16,20 +16,20 @@ function Game() {
    }
 
    this.scale = function(value) {
-      blockSize += value;
+      settings.blockSize += value;
       this.resize();
    }
 
    this.resize = function() {
       var scaledWidth = windowWidth;
       var scaledHeight = windowHeight;
-      scaledWidth -= scaledWidth % blockSize;
-      scaledHeight -= scaledHeight % blockSize;
+      scaledWidth -= scaledWidth % settings.blockSize;
+      scaledHeight -= scaledHeight % settings.blockSize;
 
       this.canvas = createCanvas(scaledWidth, scaledHeight);
 
-      this.cols = scaledWidth / blockSize;
-      this.rows = scaledHeight / blockSize;
+      this.cols = scaledWidth / settings.blockSize;
+      this.rows = scaledHeight / settings.blockSize;
 
       this.canvas.position(
        (windowWidth - scaledWidth) / 2,
@@ -49,7 +49,7 @@ function Game() {
       text("Block Size", 0, position, this.canvas.width, 50);
 
       fill(255, 0, 100);
-      rect((this.canvas.width / 2) - (blockSize / 2), 200, blockSize, blockSize);
+      rect((this.canvas.width / 2) - (settings.blockSize / 2), 200, settings.blockSize, settings.blockSize);
 
       text("Speed", 0, 300, this.canvas.width, 50);
 
