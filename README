@@ -1,0 +1,9 @@
+Structure
+
+main.js
+ - Initializes all other classes.
+ - Handles key presses.
+ - Master draw function.
+
+overlay.js
+ - Handles grid and other shit
