@@ -26,7 +26,9 @@ function Snake() {
    }
 
    this.overlaps = function(pos) {
-      if (this.x === pos.x && this.y === pos.y) {
+      if (!pos) {
+         pos = createVector(this.x, this.y);
+      } else if (this.x === pos.x && this.y === pos.y) {
          return true;
       }
 
@@ -97,17 +99,6 @@ function Snake() {
    this.update = function() {
       this.updateDirection();
 
-      var newHead = createVector(
-         this.x + this.xspeed,
-         this.y + this.yspeed
-      );
-
-      var tailCollision = true;
-      // Add transparency for effect
-      if (tailCollision && this.overlaps(newHead)) {
-         return this.kill();
-      }
-
       this.tail.push(createVector(this.x, this.y));
 
       if (this.queued === 0) {
@@ -116,8 +107,8 @@ function Snake() {
          this.queued--;
       }
 
-      this.x = newHead.x;
-      this.y = newHead.y;
+      this.x += this.xspeed;
+      this.y += this.yspeed;
 
       if (settings.loopEnabled) {
          if (this.x < 0) {
@@ -137,6 +128,12 @@ function Snake() {
             this.currentDirection = null;
             return this.kill();
          }
+      }
+
+      var tailCollision = true;
+      // Add transparency for effect
+      if (tailCollision && this.overlaps()) {
+         return this.kill();
       }
 
       if (this.overlaps(food)) {

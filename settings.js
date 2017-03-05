@@ -50,6 +50,7 @@ function Settings() {
          case 'rose':       this.colors = rose();       break;
          case 'ocean':      this.colors = ocean();      break;
          case 'forest':     this.colors = forest();     break;
+         case 'autumn':     this.colors = autumn();     break;
          case 'watermelon': this.colors = watermelon(); break;
          case 'princess':   this.colors = princess();   break;
          case 'sunset':     this.colors = sunset();     break;
