@@ -1,8 +1,13 @@
 function Grid() {
+   this.values = null;
    this.show = true;
 
    this.toggleShow = function() {
       this.show = !this.show;
+   }
+
+   this.setValues = function() {
+      this.values
    }
 
    this.draw = function() {

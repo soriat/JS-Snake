@@ -3,7 +3,7 @@ function Snake() {
    this.y = 0;
    this.xspeed = 1;
    this.yspeed = 0;
-   this.queued = 250;
+   this.queued = 2;
    this.tail = [];
 
    this.currentDirection = RIGHT_ARROW;
@@ -135,11 +135,6 @@ function Snake() {
       if (tailCollision && this.overlaps()) {
          return this.kill();
       }
-
-      if (this.overlaps(food)) {
-         this.queued += 3;
-         food.pickLocation();
-      }
    }
 
    this.draw = function() {
@@ -152,5 +147,9 @@ function Snake() {
       }, this);
 
       rect(this.x * settings.blockSize, this.y * settings.blockSize, settings.blockSize, settings.blockSize);
+   }
+
+   this.getHead = function() {
+      return createVector(this.x, this.y);
    }
 }

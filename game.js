@@ -8,6 +8,7 @@ function Game() {
    this.rows = 1;
 
    this.init = function() {
+      edibles.init();//move this
       this.resize();
 
       window.addEventListener('resize', function () {

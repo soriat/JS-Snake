@@ -8,12 +8,11 @@ function setup() {
    settings.parseParams();
 
    game = new Game();
-   snake = new Snake();
    grid = new Grid();
-   food = new Food();
+   snake = new Snake();
+   edibles = new Edibles();
 
    game.init();
-   food.pickLocation();
 }
 
 function mousePressed() {
@@ -61,9 +60,10 @@ function draw() {
    } else {
       if (!game.paused && game.currentFrame % settings.gameSpeed === 0) {
          snake.update();
+         edibles.update();
       }
 
-      food.draw();
+      edibles.draw();
       snake.draw();
       grid.draw();
    }
