@@ -91,11 +91,54 @@ function shadesOf(color) {
    return cap(colors, r * limit, g * limit, b * limit);
 }
 
+function test() {
+   return linearGradient([
+      color('#ADD5F7'),
+      color('#7FB2F0'),
+      color('#4E7AC7'),
+      color('#35478C')
+   ], .03, true);
+}
+
+function sky() {
+   return linearGradient([
+      color('#ADD5F7'),
+      color('#7FB2F0'),
+      color('#4E7AC7'),
+      color('#35478C')
+   ], .03, true);
+}
+
+function linearGradient(colors, step, mirror) {
+   var gradient = [];
+   for (var i = 0; i < colors.length - 1; i++) {
+      gradient.push(colors[i]);
+      for (var j = 0; j < 1; j += (step ? step : .03)) {
+         gradient.push(lerpColor(colors[i], colors[i + 1], j));
+      }
+   }
+
+   if (mirror) {
+      return mirrorArray(gradient);
+   }
+
+   for (var j = 0; j < 1; j += (step ? step : .03)) {
+      gradient.push(lerpColor(colors[i], colors[0], j));
+   }
+
+   return gradient;
+}
+
+function mirrorArray(values) {
+    return concat(values, reverse(values.slice(0)));
+}
+
 function vipera() {
    var white = color(255, 255, 255);
    var grey1 = color(238, 233, 233);
    var grey2 = color(205, 201, 201);
    var grey3 = color(139, 137, 137);
+
    return [
       white, white, white,
       grey1, grey1, grey1,

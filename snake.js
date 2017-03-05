@@ -3,7 +3,7 @@ function Snake() {
    this.y = 0;
    this.xspeed = 1;
    this.yspeed = 0;
-   this.queued = 0;
+   this.queued = 250;
    this.tail = [];
 
    this.currentDirection = RIGHT_ARROW;
@@ -30,8 +30,7 @@ function Snake() {
          return true;
       }
 
-      var i = 0;
-      for (i = 0; i < this.tail.length; i++) {
+      for (var i = 0; i < this.tail.length; i++) {
          if (this.tail[i].x == pos.x &&
              this.tail[i].y == pos.y) {
             return true;
