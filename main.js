@@ -51,7 +51,8 @@ function keyPressed() {
          fullscreen(!fullscreen());
          break;
       case 71: //g
-         grid.toggleShow();
+         settings.gridEnabled = !settings.gridEnabled;
+         settings.updateParams();
          break;
       case 76: //l
          settings.loopEnabled = !settings.loopEnabled;
@@ -70,7 +71,10 @@ function draw() {
 
    edibles.draw();
    snake.draw();
-   grid.draw();
+
+   if (settings.gridEnabled) {
+      grid.draw();
+   }
 
    if (game.state == 'Paused') {
       game.drawPaused();

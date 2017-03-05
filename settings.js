@@ -2,6 +2,7 @@ const DEFAULT_GAMESPEED = 3;
 const DEFAULT_BLOCKSIZE = 15;
 const DEFAULT_BORDER_WIDTH = 2;
 const DEFAULT_LOOPING = true;
+const DEFAULT_GRID = false;
 const DEFAULT_THEME = 'rainbow';
 
 function Settings() {
@@ -9,6 +10,7 @@ function Settings() {
    this.blockSize = DEFAULT_BLOCKSIZE;
    this.borderWidth = DEFAULT_BORDER_WIDTH;
    this.loopEnabled = DEFAULT_LOOPING;
+   this.gridEnabled = DEFAULT_GRID;
    this.themeName = DEFAULT_THEME;
    this.colors = rainbow();
 
@@ -37,7 +39,13 @@ function Settings() {
             type: 'bool',
             name: 'Looping',
             value: this.loopEnabled,
-            default: true,
+            default: DEFAULT_LOOPING,
+         }, {
+            param: 'g',
+            type: 'bool',
+            name: 'Grid',
+            value: this.gridEnabled,
+            default: DEFAULT_GRID,
          }, {
             param: 't',
             type: 'string',
@@ -70,6 +78,9 @@ function Settings() {
          case 'l':
             this.loopEnabled = isTruthy(value);
             return;
+         case 'g':
+            this.gridEnabled = isTruthy(value);
+            return;
          case 't':
             this.setTheme(value);
             return;
@@ -86,9 +97,9 @@ function Settings() {
        '&bs=' + this.blockSize +
        '&bw=' + this.borderWidth +
        '&l=' + (this.loopEnabled ? 1 : 0) +
+       '&g=' + (this.gridEnabled ? 1 : 0) +
        '&t=' + this.themeName;
 
-       
       history.replaceState({}, "URI Update", "index.html" + params);
    }
 
