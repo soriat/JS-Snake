@@ -24,7 +24,7 @@ function Settings() {
          case 'borderWidth':
             this.borderWidth = enforceInt(value, 2);
             return;
-         case 'blocksize':
+         case 'blockSize':
             this.blockSize = enforceInt(value, 25);
             return;
          case 'speed':
@@ -47,6 +47,7 @@ function Settings() {
          case 'vipera':     this.colors = vipera();     break;
          case 'sky':        this.colors = sky();        break;
          case 'fire':       this.colors = fire();       break;
+         case 'rose':       this.colors = rose();       break;
          case 'ocean':      this.colors = ocean();      break;
          case 'forest':     this.colors = forest();     break;
          case 'watermelon': this.colors = watermelon(); break;

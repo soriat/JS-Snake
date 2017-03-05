@@ -88,7 +88,7 @@ function Snake() {
    }
 
    this.kill = function() {
-      this.queued = 0;
+      this.queued = 2;
       this.tail = [];
       this.queuedDirection = null;
       this.bufferDirection = null;
@@ -140,7 +140,7 @@ function Snake() {
       }
 
       if (this.overlaps(food)) {
-         this.queued += 5;
+         this.queued += 3;
          food.pickLocation();
       }
    }

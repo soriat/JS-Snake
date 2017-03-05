@@ -93,11 +93,30 @@ function shadesOf(color) {
 
 function test() {
    return linearGradient([
-      color('#31AFB0'),
-      color('#1CC5D0'),
-      color('#20A7B6'),
-      color('#00699B'),
-      color('#014270')
+      color('#FFC6D5'),
+      color('#FF9BC5'),
+      color('#FF77A6'),
+      color('#FF4B7E'),
+      color('#FF007E')
+   ]);
+}
+
+function rose() {
+   return linearGradient([
+      color('#FFC6D5'),
+      color('#FF9BC5'),
+      color('#FF77A6'),
+      color('#FF4B7E'),
+      color('#FF007E')
+   ]);
+}
+
+function fire() {
+   return linearGradient([
+      color('#FFAF00'),
+      color('#B23E00'),
+      color('#9C1B00'),
+      color('#570000')
    ], .1);
 }
 
