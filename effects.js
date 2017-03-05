@@ -93,11 +93,61 @@ function shadesOf(color) {
 
 function test() {
    return linearGradient([
-      color('#ADD5F7'),
-      color('#7FB2F0'),
-      color('#4E7AC7'),
-      color('#35478C')
-   ], .03, true);
+      color('#31AFB0'),
+      color('#1CC5D0'),
+      color('#20A7B6'),
+      color('#00699B'),
+      color('#014270')
+   ], .1);
+}
+
+function ocean() {
+   return linearGradient([
+      color('#31AFB0'),
+      color('#1CC5D0'),
+      color('#20A7B6'),
+      color('#00699B'),
+      color('#014270')
+   ], .1);
+}
+
+function sunset() {
+   return linearGradient([
+      color('#EF4339'),
+      color('#CA293E'),
+      color('#820233'),
+      color('#530031'),
+      color('#3B162C')
+   ], .1);
+}
+
+function princess() {
+   return linearGradient([
+      color('#74005C'),
+      color('#6A005C'),
+      color('#59005C'),
+      color('#48005C'),
+      color('#3B005C')
+   ], .1);
+}
+
+function watermelon() {
+   return linearGradient([
+      color('#7D8A2E'),
+      color('#C9D787'),
+      color('#FFFFFF'),
+      color('#FFC0A9'),
+      color('#FF8598')
+   ]);
+}
+
+function forest() {
+   return linearGradient([
+      color('#96ED89'),
+      color('#45BF55'),
+      color('#167F39'),
+      color('#044C29')
+   ]);
 }
 
 function sky() {
@@ -106,14 +156,17 @@ function sky() {
       color('#7FB2F0'),
       color('#4E7AC7'),
       color('#35478C')
-   ], .03, true);
+   ]);
 }
 
 function linearGradient(colors, step, mirror) {
+   step = step ? step : .03;
+   mirror = mirror ? mirror : true;
+
    var gradient = [];
    for (var i = 0; i < colors.length - 1; i++) {
       gradient.push(colors[i]);
-      for (var j = 0; j < 1; j += (step ? step : .03)) {
+      for (var j = 0; j < 1; j += step) {
          gradient.push(lerpColor(colors[i], colors[i + 1], j));
       }
    }
@@ -122,7 +175,7 @@ function linearGradient(colors, step, mirror) {
       return mirrorArray(gradient);
    }
 
-   for (var j = 0; j < 1; j += (step ? step : .03)) {
+   for (var j = 0; j < 1; j += step) {
       gradient.push(lerpColor(colors[i], colors[0], j));
    }
 

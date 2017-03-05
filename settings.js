@@ -42,12 +42,17 @@ function Settings() {
 
    this.setTheme = function(theme) {
       switch(theme) {
-         case 'rainbow': this.colors = rainbow(); break;
-         case 'pastel':  this.colors = pastel();  break;
-         case 'vipera':  this.colors = vipera();  break;
-         case 'fire':    this.colors = fire();    break;
-         case 'sky':     this.colors = sky();     break;
-         case 'test':    this.colors = test();    break;
+         case 'rainbow':    this.colors = rainbow();    break;
+         case 'pastel':     this.colors = pastel();     break;
+         case 'vipera':     this.colors = vipera();     break;
+         case 'sky':        this.colors = sky();        break;
+         case 'fire':       this.colors = fire();       break;
+         case 'ocean':      this.colors = ocean();      break;
+         case 'forest':     this.colors = forest();     break;
+         case 'watermelon': this.colors = watermelon(); break;
+         case 'princess':   this.colors = princess();   break;
+         case 'sunset':     this.colors = sunset();     break;
+         case 'test':       this.colors = test();       break;
       }
    }
 }
