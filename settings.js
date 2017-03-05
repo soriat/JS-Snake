@@ -1,9 +1,11 @@
 function Settings() {
-   this.blockSize = 15;
    this.gameSpeed = 3;
-   this.loopEnabled = true;
-   this.colors = rainbow();
+   this.blockSize = 15;
    this.borderWidth = 2;
+   this.loopEnabled = true;
+
+   this.themeName = 'rainbow';
+   this.colors = rainbow();
 
    this.parseParams = function() {
       // Set values from URI parameters.
@@ -15,20 +17,20 @@ function Settings() {
 
          var value = decodeURIComponent(pair[1]);
          switch(pair[0]) {
-         case 'theme':
-            this.setTheme(value);
+         case 's':
+            this.gameSpeed = enforceInt(value, 15);
             return;
-         case 'loop':
-            this.loopEnabled = isTruthy(value);
-            return;
-         case 'borderWidth':
-            this.borderWidth = enforceInt(value, 2);
-            return;
-         case 'blockSize':
+         case 'bs':
             this.blockSize = enforceInt(value, 25);
             return;
-         case 'speed':
-            this.gameSpeed = enforceInt(value, 15);
+         case 'bw':
+            this.borderWidth = enforceInt(value, 2);
+            return;
+         case 'l':
+            this.loopEnabled = isTruthy(value);
+            return;
+         case 't':
+            this.setTheme(value);
             return;
          }
       }.bind(this));
@@ -37,7 +39,15 @@ function Settings() {
    }
 
    this.updateParams = function() {
+      var params = '?' +
+       's=' + this.gameSpeed +
+       '&bs=' + this.blockSize +
+       '&bw=' + this.borderWidth +
+       '&l=' + (this.loopEnabled ? 1 : 0) +
+       '&t=' + this.themeName;
 
+       
+      history.replaceState({}, "URI Update", "index.html" + params);
    }
 
    this.setTheme = function(theme) {
@@ -55,6 +65,9 @@ function Settings() {
          case 'princess':   this.colors = princess();   break;
          case 'sunset':     this.colors = sunset();     break;
          case 'test':       this.colors = test();       break;
+         default:
+            return;
       }
+      this.themeName = theme;
    }
 }
