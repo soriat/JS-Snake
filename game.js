@@ -1,6 +1,5 @@
 function Game() {
-   this.state = 'P';
-   this.paused = false;
+   this.state = 'Settings';
    this.canvas = null;
    this.currentFrame = 0;
 
@@ -37,23 +36,19 @@ function Game() {
        (windowHeight - scaledHeight) / 2);
    }
 
+   this.isPaused = function() {
+      return this.state === 'Paused';
+   }
+
    this.togglePause = function() {
-      this.paused = !this.paused;
+      this.state = this.isPaused() ? 'Active' : 'Paused';
    }
 
    this.drawMenu = function() {
-
       textAlign(CENTER);
 
-      textSize(32);
-      var position = this.canvas.height / 5;
-      text("Block Size", 0, position, this.canvas.width, 50);
-
+      textSize(25);
       fill(255, 0, 100);
-      rect((this.canvas.width / 2) - (settings.blockSize / 2), 200, settings.blockSize, settings.blockSize);
-
-      text("Speed", 0, 300, this.canvas.width, 50);
-
-      text(this.speed, 0, 350, this.canvas.width, 50);
+      text("(Press Space to Start)", 0, this.canvas.height - 50, this.canvas.width, 50);
    }
 }

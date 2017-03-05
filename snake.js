@@ -122,9 +122,11 @@ function Snake() {
          this.x %= game.cols;
          this.y %= game.rows;
       } else {
+         var unconstrainedHead = this.getHead();
          this.x = constrain(this.x, 0, game.cols - 1);
          this.y = constrain(this.y, 0, game.rows - 1);
-         if (!newHead.equals(this.x, this.y)) {
+
+         if (!unconstrainedHead.equals(this.x, this.y)) {
             this.currentDirection = null;
             return this.kill();
          }
