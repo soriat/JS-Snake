@@ -8,14 +8,16 @@ function Edible() {
       this.pickLocation();
    }
 
-   this.pickLocation = function() {
-      var cols = canvas.width / settings.blockSize;
-      var rows = canvas.height / settings.blockSize;
+   this.isOutsideBounds = function() {
+      return this.pos.x >= game.cols ||
+             this.pos.y >= game.rows;
+   }
 
+   this.pickLocation = function() {
       while (1) {
          var randomPos = createVector(
-            floor(random(cols)),
-            floor(random(rows))
+            floor(random(game.cols)),
+            floor(random(game.rows))
          );
 
          if (!snake.overlaps(randomPos) && !edibles.overlaps(randomPos)) {

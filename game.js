@@ -2,6 +2,7 @@ function Game() {
    this.state = 'Settings';
    this.canvas = null;
    this.currentFrame = 0;
+   this.settingIndex = 0;
 
    this.cols = 1;
    this.rows = 1;

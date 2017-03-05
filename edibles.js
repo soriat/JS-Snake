@@ -19,7 +19,9 @@ function Edibles() {
    this.update = function() {
       var head = snake.getHead();
 
-      if (this.green.pos.equals(head)) {
+      if (this.green.isOutsideBounds()) {
+         this.green.pickLocation();
+      } else if (this.green.pos.equals(head)) {
          snake.queued += 3;
          this.green.pickLocation();
       }

@@ -1,11 +1,52 @@
-function Settings() {
-   this.gameSpeed = 3;
-   this.blockSize = 15;
-   this.borderWidth = 2;
-   this.loopEnabled = true;
+const DEFAULT_GAMESPEED = 3;
+const DEFAULT_BLOCKSIZE = 15;
+const DEFAULT_BORDER_WIDTH = 2;
+const DEFAULT_LOOPING = true;
+const DEFAULT_THEME = 'rainbow';
 
-   this.themeName = 'rainbow';
+function Settings() {
+   this.gameSpeed = DEFAULT_GAMESPEED;
+   this.blockSize = DEFAULT_BLOCKSIZE;
+   this.borderWidth = DEFAULT_BORDER_WIDTH;
+   this.loopEnabled = DEFAULT_LOOPING;
+   this.themeName = DEFAULT_THEME;
    this.colors = rainbow();
+
+   this.getSettings = function() {
+      return [
+         {
+            param: 's',
+            type: 'int',
+            name: 'Game Speed',
+            value: this.gameSpeed,
+            default: DEFAULT_GAMESPEED,
+         }, {
+            param: 'bs',
+            type: 'int',
+            name: 'Block Size',
+            value: this.blockSize,
+            default: DEFAULT_BLOCKSIZE,
+         }, {
+            param: 'bw',
+            type: 'int',
+            name: 'Border Width',
+            value: this.borderWidth,
+            default: DEFAULT_BORDER_WIDTH,
+         }, {
+            param: 'l',
+            type: 'bool',
+            name: 'Looping',
+            value: this.loopEnabled,
+            default: true,
+         }, {
+            param: 't',
+            type: 'string',
+            name: 'Theme',
+            value: this.themeName,
+            default: DEFAULT_THEME,
+         }
+      ];
+   }
 
    this.parseParams = function() {
       // Set values from URI parameters.
@@ -18,13 +59,13 @@ function Settings() {
          var value = decodeURIComponent(pair[1]);
          switch(pair[0]) {
          case 's':
-            this.gameSpeed = enforceInt(value, 15);
+            this.gameSpeed = enforceInt(value, DEFAULT_GAMESPEED);
             return;
          case 'bs':
-            this.blockSize = enforceInt(value, 25);
+            this.blockSize = enforceInt(value, DEFAULT_BLOCKSIZE);
             return;
          case 'bw':
-            this.borderWidth = enforceInt(value, 2);
+            this.borderWidth = enforceInt(value, DEFAULT_BORDER_WIDTH);
             return;
          case 'l':
             this.loopEnabled = isTruthy(value);
@@ -36,6 +77,7 @@ function Settings() {
       }.bind(this));
 
       this.updateParams();
+      console.log(this.getSettings());
    }
 
    this.updateParams = function() {
@@ -50,6 +92,7 @@ function Settings() {
       history.replaceState({}, "URI Update", "index.html" + params);
    }
 
+   //todo: ifIsValidTheme(theme) theme();
    this.setTheme = function(theme) {
       switch(theme) {
          case 'rainbow':    this.colors = rainbow();    break;
