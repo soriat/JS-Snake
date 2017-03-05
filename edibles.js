@@ -7,7 +7,13 @@ function Edibles() {
    }
 
    this.draw = function() {
-      this.green.draw();
+      if (this.green) {
+         this.green.draw();
+      }
+   }
+
+   this.clear = function() {
+      this.green = null;
    }
 
    this.update = function() {

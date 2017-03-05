@@ -20,7 +20,7 @@ function keyPressed() {
       case 32: // Spacebar
       case 83: //s
          //reinit game.
-         game.state = 'Active';
+         game.activate();
          break;
       }
    } else if (game.state === 'Active') {
@@ -37,6 +37,7 @@ function keyPressed() {
          break;
       case 83: //s
          game.state = 'Settings';
+         game.clear();
       }
    } else if (game.state === 'Paused') {
       if (keyCode === 32 || keyCode == 80) {
@@ -64,16 +65,20 @@ function draw() {
    background(20);
 
    if (game.state == 'Settings') {
-      game.drawMenu();
+      return game.drawMenu();
+   }
+
+   edibles.draw();
+   snake.draw();
+   grid.draw();
+
+   if (game.state == 'Paused') {
+      game.drawPaused();
    } else {
-      if (!game.isPaused() && game.currentFrame % settings.gameSpeed === 0) {
+      if (game.currentFrame % settings.gameSpeed === 0) {
          snake.update();
          edibles.update();
       }
-
-      edibles.draw();
-      snake.draw();
-      grid.draw();
    }
 
    game.currentFrame = (game.currentFrame + 1) % 60;

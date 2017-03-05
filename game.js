@@ -8,7 +8,6 @@ function Game() {
 
    this.init = function() {
       this.resize();
-      edibles.init();//move this
 
       window.addEventListener('resize', function () {
          this.resize();
@@ -36,12 +35,32 @@ function Game() {
        (windowHeight - scaledHeight) / 2);
    }
 
+   this.clear = function() {
+      snake.kill();
+      snake.x = 0;
+      snake.y = 0;
+      edibles.clear();
+   }
+
+   this.activate = function() {
+      this.state = 'Active';
+      edibles.init();
+   }
+
    this.isPaused = function() {
       return this.state === 'Paused';
    }
 
    this.togglePause = function() {
       this.state = this.isPaused() ? 'Active' : 'Paused';
+   }
+
+   this.drawPaused = function() {
+      textAlign(CENTER);
+
+      textSize(25);
+      fill(255, 0, 100);
+      text("(Paused)", 0, this.canvas.height / 2, this.canvas.width, 50);
    }
 
    this.drawMenu = function() {

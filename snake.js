@@ -90,8 +90,8 @@ function Snake() {
    }
 
    this.kill = function() {
-      this.queued = 2;
       this.tail = [];
+      this.queued = 2;
       this.queuedDirection = null;
       this.bufferDirection = null;
    }
