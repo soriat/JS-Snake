@@ -71,12 +71,14 @@ function shadesOf(color) {
       break;
    case 'purple':
       r = b = 1;
-      width = 250;
    case 'yellow':
       r = g = 1;
       break;
    case 'cyan':
       g = b = 1;
+      break;
+   case 'white':
+      r = g = b = 1;
       break;
    }
 
@@ -87,6 +89,19 @@ function shadesOf(color) {
    );
 
    return cap(colors, r * limit, g * limit, b * limit);
+}
+
+function vipera() {
+   var white = color(255, 255, 255);
+   var grey1 = color(238, 233, 233);
+   var grey2 = color(205, 201, 201);
+   var grey3 = color(139, 137, 137);
+   return [
+      white, white, white,
+      grey1, grey1, grey1,
+      grey2, grey2, grey2,
+      grey3, grey3, grey3
+   ];
 }
 
 function rainbow() {

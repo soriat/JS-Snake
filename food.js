@@ -2,7 +2,7 @@ function Food() {
    this.x = 0;
    this.y = 0;
    this.colorIndex = 0;
-   this.colors = shadesOf('red');
+   this.colors = shadesOf('white');
 
    this.pickLocation = function() {
       var cols = canvas.width / settings.blockSize;

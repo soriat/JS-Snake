@@ -48,13 +48,17 @@ function Settings() {
          case 'pastel':
             this.colors = pastel();
             break;
+         case 'vipera':
+            this.colors = vipera();
+            break;
          case 'red':
          case 'green':
          case 'blue':
          case 'purple':
          case 'yellow':
          case 'cyan':
-            this.colors = shadesOf(theme);
+         case 'white':
+         this.colors = [...new Set(shadesOf(theme))];
             break;
       }
    }
