@@ -1,13 +1,15 @@
-function Game() {
-   this.state = 'Settings';
-   this.canvas = null;
-   this.currentFrame = 0;
-   this.settingIndex = 0;
+class Game {
+   constructor() {
+      this.state = 'Settings';
+      this.canvas = null;
+      this.currentFrame = 0;
+      this.settingIndex = 0;
 
-   this.cols = 1;
-   this.rows = 1;
+      this.cols = 1;
+      this.rows = 1;
+   }
 
-   this.init = function() {
+   init() {
       this.resize();
 
       window.addEventListener('resize', function () {
@@ -15,12 +17,12 @@ function Game() {
       }.bind(this));
    }
 
-   this.scale = function(value) {
+   scale(value) {
       settings.blockSize += value;
       this.resize();
    }
 
-   this.resize = function() {
+   resize() {
       var scaledWidth = windowWidth;
       var scaledHeight = windowHeight;
       scaledWidth -= scaledWidth % settings.blockSize;
@@ -36,7 +38,7 @@ function Game() {
        (windowHeight - scaledHeight) / 2);
    }
 
-   this.clear = function() {
+   clear() {
       snake.kill();
       snake.x = 0;
       snake.y = 0;
@@ -44,20 +46,20 @@ function Game() {
       edibles.clear();
    }
 
-   this.activate = function() {
+   activate() {
       this.state = 'Active';
       edibles.init();
    }
 
-   this.isPaused = function() {
+   isPaused() {
       return this.state === 'Paused';
    }
 
-   this.togglePause = function() {
+   togglePause() {
       this.state = this.isPaused() ? 'Active' : 'Paused';
    }
 
-   this.drawPaused = function() {
+   drawPaused() {
       textAlign(CENTER);
 
       textSize(25);
@@ -65,7 +67,7 @@ function Game() {
       text("(Paused)", 0, this.canvas.height / 2, this.canvas.width, 50);
    }
 
-   this.drawMenu = function() {
+   drawMenu() {
       textAlign(CENTER);
 
       textSize(25);

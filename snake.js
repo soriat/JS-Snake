@@ -1,21 +1,23 @@
-function Snake() {
-   this.x = 0;
-   this.y = 0;
-   this.xspeed = 1;
-   this.yspeed = 0;
-   this.queued = 2;
-   this.tail = [];
+class Snake {
+   constructor() {
+      this.x = 0;
+      this.y = 0;
+      this.xspeed = 1;
+      this.yspeed = 0;
+      this.queued = 2;
+      this.tail = [];
 
-   this.currentDirection = RIGHT_ARROW;
-   this.queuedDirection = null;
-   this.bufferDirection = null;
+      this.currentDirection = RIGHT_ARROW;
+      this.queuedDirection = null;
+      this.bufferDirection = null;
+   }
 
-   this.setDirection = function(x, y) {
+   setDirection(x, y) {
       this.xspeed = x;
       this.yspeed = y;
    }
 
-   this.overlaps = function(pos) {
+   overlaps(pos) {
       if (!pos) {
          pos = createVector(this.x, this.y);
       } else if (this.x === pos.x && this.y === pos.y) {
@@ -30,7 +32,7 @@ function Snake() {
       };
    }
 
-   this.queueDirection = function(newDirection) {
+   queueDirection(newDirection) {
       if (this.canChangeDirectionTo(newDirection)) {
          if (this.queuedDirection === null) {
             this.queuedDirection = newDirection;
@@ -40,7 +42,7 @@ function Snake() {
       }
    }
 
-   this.canChangeDirectionTo = function(newDirection) {
+   canChangeDirectionTo(newDirection) {
       if (this.bufferDirection) {
          return false;
       }
@@ -61,7 +63,7 @@ function Snake() {
       return false;
    }
 
-   this.updateDirection = function() {
+   updateDirection() {
       if (this.queuedDirection !== null) {
          this.currentDirection = this.queuedDirection;
          if (this.queuedDirection === UP_ARROW) {
@@ -79,14 +81,14 @@ function Snake() {
       }
    }
 
-   this.kill = function() {
+   kill() {
       this.tail = [];
       this.queued = 2;
       this.queuedDirection = null;
       this.bufferDirection = null;
    }
 
-   this.update = function() {
+   update() {
       this.updateDirection();
 
       this.tail.push(createVector(this.x, this.y));
@@ -129,7 +131,7 @@ function Snake() {
       }
    }
 
-   this.draw = function() {
+   draw() {
       var i = 0;
       fill(settings.colors[i]);
 
@@ -142,7 +144,7 @@ function Snake() {
       rect(this.x * settings.blockSize, this.y * settings.blockSize, settings.blockSize, settings.blockSize);
    }
 
-   this.getHead = function() {
+   getHead() {
       return createVector(this.x, this.y);
    }
 }

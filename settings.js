@@ -5,31 +5,18 @@ const DEFAULT_LOOPING = true;
 const DEFAULT_GRID = false;
 const DEFAULT_THEME = 'rainbow';
 
-class Setting {
-   constructor(height, width) {
-      this.height = height;
-      this.width = width;
+class Settings {
+   constructor() {
+      this.gameSpeed = DEFAULT_GAMESPEED;
+      this.blockSize = DEFAULT_BLOCKSIZE;
+      this.borderWidth = DEFAULT_BORDER_WIDTH;
+      this.loopEnabled = DEFAULT_LOOPING;
+      this.gridEnabled = DEFAULT_GRID;
+      this.themeName = DEFAULT_THEME;
+      this.colors = rainbow();
    }
 
-   static distance(a, b) {
-      const dx = a.x - b.x;
-      const dy = a.y - b.y;
-
-      return Math.sqrt(dx*dx + dy*dy);
-   }
-}
-var setting = new Setting(1, 2);
-
-function Settings() {
-   this.gameSpeed = DEFAULT_GAMESPEED;
-   this.blockSize = DEFAULT_BLOCKSIZE;
-   this.borderWidth = DEFAULT_BORDER_WIDTH;
-   this.loopEnabled = DEFAULT_LOOPING;
-   this.gridEnabled = DEFAULT_GRID;
-   this.themeName = DEFAULT_THEME;
-   this.colors = rainbow();
-
-   this.getSettings = function() {
+   getSettings() {
       return [
          {
             param: 's',
@@ -77,7 +64,7 @@ function Settings() {
       ];
    }
 
-   this.parseParams = function() {
+   parseParams() {
       var settings = this.getSettings;
 
       // Set values from URI parameters.
@@ -97,7 +84,7 @@ function Settings() {
       this.updateParams();
    }
 
-   this.updateParams = function() {
+   updateParams() {
       var URI = 'index.html?';
       this.getSettings().forEach(function(setting) {
          URI += setting.param + '=' + cleanTruthy(setting.value);
@@ -107,7 +94,7 @@ function Settings() {
    }
 
    //todo: ifIsValidTheme(theme) theme();
-   this.setTheme = function(theme) {
+   setTheme(theme) {
       switch(theme) {
          case 'rainbow':    this.colors = rainbow();    break;
          case 'pastel':     this.colors = pastel();     break;
