@@ -2,8 +2,7 @@ function Edibles() {
    this.green = null;
 
    this.init = function() {
-      this.green = new Edible();
-      this.green.init('green');
+      this.green = new Edible('green');
    }
 
    this.draw = function() {

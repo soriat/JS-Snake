@@ -1,19 +1,18 @@
-function Edible() {
-   this.pos = null;
-   this.colorIndex = 0;
-   this.colors = [];
-
-   this.init = function(color) {
+class Edible {
+   constructor(color) {
+      this.pos = null;
+      this.colorIndex = 0;
       this.colors = shadesOf(color);
       this.pickLocation();
    }
 
-   this.isOutsideBounds = function() {
+   //offscreen rename
+   isOutsideBounds() {
       return this.pos.x >= game.cols ||
              this.pos.y >= game.rows;
    }
 
-   this.pickLocation = function() {
+   pickLocation() {
       while (1) {
          var randomPos = createVector(
             floor(random(game.cols)),
@@ -27,7 +26,7 @@ function Edible() {
       }
    }
 
-   this.draw = function() {
+   draw() {
       fill(this.colors[this.colorIndex]);
       rect(
          this.pos.x * settings.blockSize,
