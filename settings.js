@@ -17,10 +17,6 @@ class Setting {
 
       return Math.sqrt(dx*dx + dy*dy);
    }
-
-   eat() {
-      alert('oh my');
-   }
 }
 var setting = new Setting(1, 2);
 
@@ -34,8 +30,6 @@ function Settings() {
    this.colors = rainbow();
 
    this.getSettings = function() {
-      console.log(setting);
-      setting.eat();
       return [
          {
             param: 's',
