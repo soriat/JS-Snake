@@ -5,6 +5,25 @@ const DEFAULT_LOOPING = true;
 const DEFAULT_GRID = false;
 const DEFAULT_THEME = 'rainbow';
 
+class Setting {
+   constructor(height, width) {
+      this.height = height;
+      this.width = width;
+   }
+
+   static distance(a, b) {
+      const dx = a.x - b.x;
+      const dy = a.y - b.y;
+
+      return Math.sqrt(dx*dx + dy*dy);
+   }
+
+   eat() {
+      alert('oh my');
+   }
+}
+var setting = new Setting(1, 2);
+
 function Settings() {
    this.gameSpeed = DEFAULT_GAMESPEED;
    this.blockSize = DEFAULT_BLOCKSIZE;
@@ -15,48 +34,58 @@ function Settings() {
    this.colors = rainbow();
 
    this.getSettings = function() {
+      console.log(setting);
+      setting.eat();
       return [
          {
             param: 's',
-            type: 'int',
             name: 'Game Speed',
             value: this.gameSpeed,
-            default: DEFAULT_GAMESPEED,
+            set: function(value) {
+               settings.gameSpeed = enforceInt(value, DEFAULT_GAMESPEED);
+            }
          }, {
             param: 'bs',
-            type: 'int',
             name: 'Block Size',
             value: this.blockSize,
-            default: DEFAULT_BLOCKSIZE,
+            set: function(value) {
+               settings.blockSize = enforceInt(value, DEFAULT_BLOCKSIZE);
+            }
          }, {
             param: 'bw',
-            type: 'int',
             name: 'Border Width',
             value: this.borderWidth,
-            default: DEFAULT_BORDER_WIDTH,
+            set: function(value) {
+               settings.borderWidth = enforceInt(value, DEFAULT_BORDER_WIDTH);
+            }
          }, {
             param: 'l',
-            type: 'bool',
             name: 'Looping',
             value: this.loopEnabled,
-            default: DEFAULT_LOOPING,
+            set: function(value) {
+               settings.loopEnabled = defaultTruthy(value, DEFAULT_LOOPING);
+            }
          }, {
             param: 'g',
-            type: 'bool',
             name: 'Grid',
             value: this.gridEnabled,
-            default: DEFAULT_GRID,
+            set: function(value) {
+               settings.gridEnabled = defaultTruthy(value, DEFAULT_GRID);
+            }
          }, {
             param: 't',
-            type: 'string',
             name: 'Theme',
             value: this.themeName,
-            default: DEFAULT_THEME,
+            set: function(value) {
+               settings.setTheme(value);
+            }
          }
       ];
    }
 
    this.parseParams = function() {
+      var settings = this.getSettings;
+
       // Set values from URI parameters.
       location.search.substr(1).split("&").forEach(function(param) {
          var pair = param.split("=");
@@ -64,43 +93,23 @@ function Settings() {
             return;
          }
 
-         var value = decodeURIComponent(pair[1]);
-         switch(pair[0]) {
-         case 's':
-            this.gameSpeed = enforceInt(value, DEFAULT_GAMESPEED);
-            return;
-         case 'bs':
-            this.blockSize = enforceInt(value, DEFAULT_BLOCKSIZE);
-            return;
-         case 'bw':
-            this.borderWidth = enforceInt(value, DEFAULT_BORDER_WIDTH);
-            return;
-         case 'l':
-            this.loopEnabled = isTruthy(value);
-            return;
-         case 'g':
-            this.gridEnabled = isTruthy(value);
-            return;
-         case 't':
-            this.setTheme(value);
-            return;
+         for (var i = 0; i < settings.length; i++) {
+            if (settings[i].param === pair[0]) {
+               settings[i].set(decodeURIComponent(pair[1]));
+            }
          }
       }.bind(this));
 
       this.updateParams();
-      console.log(this.getSettings());
    }
 
    this.updateParams = function() {
-      var params = '?' +
-       's=' + this.gameSpeed +
-       '&bs=' + this.blockSize +
-       '&bw=' + this.borderWidth +
-       '&l=' + (this.loopEnabled ? 1 : 0) +
-       '&g=' + (this.gridEnabled ? 1 : 0) +
-       '&t=' + this.themeName;
+      var URI = 'index.html?';
+      this.getSettings().forEach(function(setting) {
+         URI += setting.param + '=' + cleanTruthy(setting.value);
+      });
 
-      history.replaceState({}, "URI Update", "index.html" + params);
+      history.replaceState({}, "URI Update", URI);
    }
 
    //todo: ifIsValidTheme(theme) theme();

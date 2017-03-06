@@ -2,6 +2,17 @@ function isTruthy(value) {
    return value === '1' || value === 'on';
 }
 
+function defaultTruthy(value, defaultValue) {
+   return (typeof value === 'undefined') ? defaultValue : isTruthy(value);
+}
+
+function cleanTruthy(value) {
+   if (typeof value === 'boolean') {
+      return value ? 1 : 0;
+   }
+
+   return value;
+}
 function isInt(value) {
    return !isNaN(value) && (function(x) {
       return (x | 0) === x;
