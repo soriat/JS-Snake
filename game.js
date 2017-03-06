@@ -40,6 +40,7 @@ function Game() {
       snake.kill();
       snake.x = 0;
       snake.y = 0;
+      snake.currentDirection = RIGHT_ARROW;
       edibles.clear();
    }
 

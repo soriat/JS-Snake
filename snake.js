@@ -10,16 +10,6 @@ function Snake() {
    this.queuedDirection = null;
    this.bufferDirection = null;
 
-   this.eat = function(pos) {
-      var d = dist(this.x, this.y, pos.x, pos.y);
-      if (d < 1) {
-         this.queued += 3;
-         return true;
-      } else {
-         return false;
-      }
-   }
-
    this.setDirection = function(x, y) {
       this.xspeed = x;
       this.yspeed = y;
@@ -142,6 +132,7 @@ function Snake() {
    this.draw = function() {
       var i = 0;
       fill(settings.colors[i]);
+
       this.tail.forEach(function(element) {
          fill(settings.colors[i]);
          rect(element.x * settings.blockSize, element.y * settings.blockSize, settings.blockSize, settings.blockSize);

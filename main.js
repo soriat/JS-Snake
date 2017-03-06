@@ -3,7 +3,6 @@ function setup() {
    settings.parseParams();
 
    game = new Game();
-   grid = new Grid();
    snake = new Snake();
    edibles = new Edibles();
 
