@@ -1,3 +1,20 @@
+function getThemes() {
+   return [
+      'rainbow',
+      'pastel',
+      'vipera',
+      'sky',
+      'fire',
+      'rose',
+      'ocean',
+      'forest',
+      'autumn',
+      'watermelon',
+      'princess',
+      'sunset',
+      'test',
+   ];
+}
 // From https://krazydad.com/tutorials/makecolors.php
 function makeColorGradient(
    frequency1, frequency2, frequency3,

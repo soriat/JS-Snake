@@ -16,6 +16,8 @@ class Game {
       window.addEventListener('resize', function () {
          this.resize();
       }.bind(this));
+
+      this.initMenu();
    }
 
    scale(value) {
@@ -44,12 +46,15 @@ class Game {
       snake.x = 0;
       snake.y = 0;
       snake.currentDirection = RIGHT_ARROW;
-      edibles.clear();
+      edibles.reset();
+   }
+
+   initMenu() {
+      this.clear();
    }
 
    activate() {
       this.state = 'Active';
-      edibles.init();
    }
 
    isPaused() {
@@ -71,6 +76,7 @@ class Game {
    drawMenu() {
       textAlign(CENTER);
 
+      text("Shortcuts:", 0, this.canvas.height - 50, this.canvas.width, 50);
       textSize(25);
       fill(255, 0, 100);
       text("(Press Space to Start)", 0, this.canvas.height - 50, this.canvas.width, 50);

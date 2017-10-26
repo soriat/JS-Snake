@@ -3,21 +3,19 @@ class Edibles {
       this.green = null;
    }
 
-   init() {
-      this.green = new Edible('green');
-   }
-
-   draw() {
-      if (this.green) {
-         this.green.draw();
-      }
-   }
-
    clear() {
       this.green = null;
    }
 
+   reset() {
+      this.green = new Edible('green');
+   }
+
    update() {
+      if (!this.green) {
+         return;
+      }
+
       var head = snake.getHead();
 
       if (this.green.isOutsideBounds()) {
@@ -30,5 +28,11 @@ class Edibles {
 
    overlaps(pos) {
       return this.green && this.green.pos.equals(pos);
+   }
+
+   draw() {
+      if (this.green) {
+         this.green.draw();
+      }
    }
 }

@@ -18,7 +18,8 @@ function keyPressed() {
       switch(keyCode) {
       case 32: // Spacebar
       case 83: //s
-         //reinit game.
+         // fix this
+         // reinit game.
          game.activate();
          break;
       }
@@ -34,9 +35,6 @@ function keyPressed() {
       case 80: //p
          game.togglePause();
          break;
-      case 83: //s
-         game.state = 'Settings';
-         game.clear();
       }
    } else if (game.state === 'Paused') {
       if (keyCode === 32 || keyCode == 80) {
@@ -46,27 +44,38 @@ function keyPressed() {
 
    // Global actions
    switch(keyCode) {
-      case 70: //f
-         fullscreen(!fullscreen());
-         break;
-      case 71: //g
-         settings.gridEnabled = !settings.gridEnabled;
-         settings.updateParams();
-         break;
-      case 76: //l
-         settings.loopEnabled = !settings.loopEnabled;
-         settings.updateParams();
-         break;
+   case 66: // b: Block Size
+      settings.update('blockSize', event.shiftKey);
+      break;
+   case 67: // c: Color
+      settings.update('color', event.shiftKey);
+      break;
+   case 82: // r: Reset
+      settings = new Settings();
+      settings.updateParams();
+      game.resize();
+      break;
+   case 83: // s: Speed
+      settings.update('speed', event.shiftKey);
+      break;
+   case 84: // t: Thickness
+      settings.update('thickness', event.shiftKey);
+      break;
+   case 70: // f: Toggle fullscreen
+      settings.toggleFullscreen();
+      break;
+   case 71: // g: Toggle Grid
+      settings.toggleGrid();
+      break;
+   case 76: // l: Toggle Loop
+      settings.toggleLoop();
+      break;
    }
 }
 
 function draw() {
    strokeWeight(settings.borderWidth);
    background(20);
-
-   if (game.state == 'Settings') {
-      return game.drawMenu();
-   }
 
    if (settings.gridEnabled) {
       for (var x = 0; x < game.cols; x++) {
@@ -78,8 +87,8 @@ function draw() {
       }
    }
 
-   edibles.draw();
    snake.draw();
+   edibles.draw();
 
    if (game.state == 'Paused') {
       game.drawPaused();
@@ -89,6 +98,11 @@ function draw() {
          edibles.update();
       }
    }
+
+   if (game.state == 'Settings') {
+      game.drawMenu();
+   }
+
 
    game.currentFrame = frameCount % 60;
 }

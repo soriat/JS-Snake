@@ -132,15 +132,20 @@ class Snake {
    }
 
    draw() {
-      var i = 0;
+      var colorIndex = 0;
 
       this.tail.forEach(function(element) {
-         fill(settings.colors[i]);
-         rect(element.x * settings.blockSize, element.y * settings.blockSize, settings.blockSize, settings.blockSize);
-         i = (i + 1) % settings.colors.length;
+         fill(settings.colors[colorIndex]);
+         rect(element.x * settings.blockSize,
+              element.y * settings.blockSize,
+              settings.blockSize, settings.blockSize);
+         colorIndex = (colorIndex + 1) % settings.colors.length;
       }, this);
 
-      rect(this.x * settings.blockSize, this.y * settings.blockSize, settings.blockSize, settings.blockSize);
+      fill(settings.colors[colorIndex]);
+      rect(this.x * settings.blockSize,
+           this.y * settings.blockSize,
+           settings.blockSize, settings.blockSize);
    }
 
    getHead() {

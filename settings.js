@@ -1,8 +1,8 @@
 const DEFAULT_GAMESPEED = 3;
-const DEFAULT_BLOCKSIZE = 15;
+const DEFAULT_BLOCKSIZE = 20;
 const DEFAULT_BORDER_WIDTH = 2;
 const DEFAULT_LOOPING = true;
-const DEFAULT_GRID = false;
+const DEFAULT_GRID = true;
 const DEFAULT_THEME = 'rainbow';
 
 class Settings {
@@ -81,6 +81,52 @@ class Settings {
          }
       }.bind(this));
 
+      this.updateParams();
+   }
+
+   toggleFullscreen() {
+      fullscreen(!fullscreen());
+   }
+
+   toggleGrid() {
+      this.gridEnabled = !this.gridEnabled;
+      this.updateParams();
+   }
+
+   toggleLoop() {
+      this.loopEnabled = !this.loopEnabled;
+      this.updateParams();
+   }
+
+   update(setting, increment) {
+      switch(setting) {
+      case 'blockSize':
+         var val = this.blockSize + (increment ? 1 : -1);
+         this.blockSize = max(val, this.borderWidth + 1);
+         game.resize();
+         break;
+      case 'color':
+         var themes = getThemes();
+         var curIndex = themes.indexOf(this.themeName);
+         var newIndex = curIndex + (increment ? 1 : -1);
+         if (newIndex < 0) {
+            this.setTheme(themes[themes.length - 1]);
+         } else {
+            this.setTheme(themes[newIndex % themes.length]);
+         }
+         break;
+      case 'thickness':
+         var val = this.borderWidth + (increment ? 1 : -1);
+         this.borderWidth = min(max(val, 0), this.blockSize - 1);
+         game.resize();
+         break;
+      case 'speed':
+         var validSpeeds = [1, 2, 3, 5, 6, 10, 12, 15, 20, 30, 60];
+         var curIndex = validSpeeds.indexOf(this.gameSpeed);
+         var newIndex = min(max(curIndex + (increment ? -1 : 1), 0), 10);
+         this.gameSpeed = validSpeeds[newIndex];
+         break;
+      }
       this.updateParams();
    }
 

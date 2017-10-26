@@ -28,11 +28,9 @@ class Edible {
 
    draw() {
       fill(this.colors[this.colorIndex]);
-      rect(
-         this.pos.x * settings.blockSize,
-         this.pos.y * settings.blockSize,
-         settings.blockSize, settings.blockSize
-      );
+      rect(this.pos.x * settings.blockSize,
+           this.pos.y * settings.blockSize,
+           settings.blockSize, settings.blockSize);
 
       if (game.currentFrame % 2 === 0) {
          this.colorIndex = (this.colorIndex + 1) % this.colors.length;
