@@ -133,7 +133,6 @@ class Snake {
 
    draw() {
       var i = 0;
-      fill(settings.colors[i]);
 
       this.tail.forEach(function(element) {
          fill(settings.colors[i]);

@@ -28,7 +28,7 @@ class Edibles {
       }
    }
 
-   overlaps() {
-      return false;
+   overlaps(pos) {
+      return this.green && this.green.pos.equals(pos);
    }
 }

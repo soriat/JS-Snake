@@ -11,6 +11,7 @@ class Game {
 
    init() {
       this.resize();
+      frameRate(60);
 
       window.addEventListener('resize', function () {
          this.resize();

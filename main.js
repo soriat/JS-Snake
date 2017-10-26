@@ -68,18 +68,18 @@ function draw() {
       return game.drawMenu();
    }
 
-   edibles.draw();
-   snake.draw();
-
    if (settings.gridEnabled) {
-      for (var i = 0; i < game.cols; i++) {
-         line(i * settings.blockSize, 0, i * settings.blockSize, height);
+      for (var x = 0; x < game.cols; x++) {
+         line(x * settings.blockSize, 0, x * settings.blockSize, height);
       }
 
-      for (var i = 0; i < game.rows; i++) {
-         line(0, i * settings.blockSize, width,  i * settings.blockSize);
+      for (var y = 0; y < game.rows; y++) {
+         line(0, y * settings.blockSize, width,  y * settings.blockSize);
       }
    }
+
+   edibles.draw();
+   snake.draw();
 
    if (game.state == 'Paused') {
       game.drawPaused();
@@ -90,5 +90,5 @@ function draw() {
       }
    }
 
-   game.currentFrame = (game.currentFrame + 1) % 60;
+   game.currentFrame = frameCount % 60;
 }

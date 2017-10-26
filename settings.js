@@ -65,7 +65,7 @@ class Settings {
    }
 
    parseParams() {
-      var settings = this.getSettings;
+      var settings = this.getSettings();
 
       // Set values from URI parameters.
       location.search.substr(1).split("&").forEach(function(param) {
@@ -86,8 +86,9 @@ class Settings {
 
    updateParams() {
       var URI = 'index.html?';
+
       this.getSettings().forEach(function(setting) {
-         URI += setting.param + '=' + cleanTruthy(setting.value);
+         URI += setting.param + '=' + cleanTruthy(setting.value) + '&';
       });
 
       history.replaceState({}, "URI Update", URI);
