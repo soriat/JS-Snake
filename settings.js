@@ -137,6 +137,10 @@ class Settings {
          URI += setting.param + '=' + cleanTruthy(setting.value) + '&';
       });
 
+      if (typeof(snake) != "undefined" && game.state == 'Active') {
+         URI += 'length=' + (snake.tail.length + 1);
+      }
+
       history.replaceState({}, "URI Update", URI);
    }
 
