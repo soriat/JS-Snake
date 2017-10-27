@@ -19,7 +19,8 @@ class Game {
          this.resize();
       }.bind(this));
 
-      this.initMenu();
+      this.reset();
+      snake.queued = 35;
    }
 
    scale(value) {
@@ -43,20 +44,18 @@ class Game {
        (windowHeight - scaledHeight) / 2);
    }
 
-   clear() {
+   reset() {
       snake.kill();
       snake.x = 0;
       snake.y = 0;
       snake.currentDirection = RIGHT_ARROW;
+      snake.queueDirection(RIGHT_ARROW);
       edibles.reset();
-   }
-
-   initMenu() {
-      this.clear();
    }
 
    activate() {
       this.state = 'Active';
+      this.reset();
    }
 
    isPaused() {
@@ -214,9 +213,11 @@ class Game {
 
       this.drawArrowKeys(x + 150, y + 200, color, 'Movement');
 
-      var creditWidth = 180;
-      var creditX = (this.canvas.width - creditWidth) / 2;
-      this.drawCredit(creditX, y + 400, color, 'Thomas Soria');
+      if (this.state == 'Settings') {
+         var creditWidth = 180;
+         var creditX = (this.canvas.width - creditWidth) / 2;
+         this.drawCredit(creditX, y + 400, color, 'Thomas Soria');
+      }
 
       strokeWeight(settings.borderWidth);
    }

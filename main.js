@@ -16,10 +16,11 @@ function mousePressed() {
 function keyPressed() {
    if (game.state === 'Settings') {
       switch(keyCode) {
+      case UP_ARROW:
+      case DOWN_ARROW:
+      case RIGHT_ARROW:
+      case LEFT_ARROW:
       case 32: // Spacebar
-      case 83: //s
-         // fix this
-         // reinit game.
          game.activate();
          break;
       }
@@ -32,11 +33,11 @@ function keyPressed() {
          snake.queueDirection(keyCode);
          break;
       case 32: // Spacebar
-      case 80: //p
+      case 80: // p: Pause
          game.togglePause();
          break;
       }
-   } else if (game.state === 'Paused') {
+   } else if (game.isPaused()) {
       if (keyCode === 32 || keyCode == 80) {
          game.state = 'Active';
       }

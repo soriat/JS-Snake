@@ -102,7 +102,25 @@ class Snake {
       this.x += this.xspeed;
       this.y += this.yspeed;
 
-      if (settings.loopEnabled) {
+      if (game.state == 'Settings') {
+         // Right wall
+         if (this.currentDirection == RIGHT_ARROW &&
+          this.x == game.cols - 1) {
+            this.queueDirection(DOWN_ARROW);
+         } else if (this.currentDirection == DOWN_ARROW &&
+          this.y == game.rows - 1) {
+            this.queueDirection(LEFT_ARROW);
+         } else if (this.currentDirection == LEFT_ARROW &&
+          this.x == 0) {
+            this.queueDirection(UP_ARROW);
+         } else if (this.currentDirection == UP_ARROW &&
+          this.y == 0) {
+            this.queueDirection(RIGHT_ARROW);
+         }
+
+         this.x %= game.cols;
+         this.y %= game.rows;
+      } else if (settings.loopEnabled) {
          if (this.x < 0) {
             this.x = game.cols - 1;
          }
