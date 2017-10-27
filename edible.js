@@ -32,7 +32,7 @@ class Edible {
            this.pos.y * settings.blockSize,
            settings.blockSize, settings.blockSize);
 
-      if (game.currentFrame % 2 === 0) {
+      if (game.currentFrame % 3 === 0) {
          this.colorIndex = (this.colorIndex + 1) % this.colors.length;
       }
    }

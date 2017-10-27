@@ -12,9 +12,9 @@ function getThemes() {
       'watermelon',
       'princess',
       'sunset',
-      'test',
    ];
 }
+
 // From https://krazydad.com/tutorials/makecolors.php
 function makeColorGradient(
    frequency1, frequency2, frequency3,
@@ -26,9 +26,11 @@ function makeColorGradient(
    if (center == undefined) {
       center = 128;
    }
+
    if (width == undefined) {
       width = 127;
    }
+
    if (len == undefined) {
       len = 255;
       noDuplicates = true;
