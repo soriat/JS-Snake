@@ -136,14 +136,14 @@ class Game {
       line(x + 108, y + 18, x + 100, y + 26);
 
       // Up
-      line(x + 57, y - 13, x + 57, y - 33);
-      line(x + 57, y - 33, x + 49, y - 24);
-      line(x + 57, y - 33, x + 65, y - 24);
+      line(x + 58, y - 13, x + 58, y - 33);
+      line(x + 58, y - 33, x + 50, y - 24);
+      line(x + 58, y - 33, x + 66, y - 24);
 
       // Down
-      line(x + 57, y + 8,  x + 57, y + 27);
-      line(x + 57, y + 27, x + 49, y + 18);
-      line(x + 57, y + 27, x + 65, y + 18);
+      line(x + 58, y + 8,  x + 58, y + 27);
+      line(x + 58, y + 27, x + 50, y + 18);
+      line(x + 58, y + 27, x + 66, y + 18);
    }
 
    drawSpacebar(x, y, color, t1, title) {
@@ -164,12 +164,20 @@ class Game {
    }
 
    drawTitle(x, y, color, title, subtitle) {
-      textAlign(CENTER);
+      fill(color);
+      textAlign(LEFT);
       textSize(30);
-      text(title, x, y);
+      text(title, x + 17, y);
 
       textSize(20);
       text(subtitle, x, y + 35);
+   }
+
+   drawCredit(x, y, color, name) {
+      fill(color);
+      textAlign(LEFT);
+      textSize(25);
+      text(name, x, y);
    }
 
    drawMenu() {
@@ -191,19 +199,27 @@ class Game {
       var x = (this.canvas.width - menuWidth) / 2;
       var y = (this.canvas.height - menuHeight) / 2;
 
-      this.drawTitle(350, 50, color, 'Henry Clay', 'The Friendly Snake');
+      var titleWidth = 215;
+      var titleX = (this.canvas.width - titleWidth) / 2;
+      this.drawTitle(titleX, y - 150, color, 'Henry Clay', 'The Friendly Snake');
+
       this.drawKeyPair(x, y,  color, 'S', 's', '+/- Speed');
       this.drawKeyPair(x, y + 50,  color, 'B', 'b', '+/- Block Size');
       this.drawKeyPair(x, y + 100, color,  'T', 't', '+/- Thickness');
 
-      this.drawKey(x + 300, y,     color, 'f', 'Fullscreen');
-      this.drawKey(x + 300, y + 50,     color, 'c', 'Color');
-      this.drawKey(x + 300, y + 100,     color, 'l', 'Loop');
-      this.drawKey(x + 300, y + 150,     color, 'g', 'Grid');
-      this.drawKey(x + 300, y + 200,     color, 'r', 'Reset Settings');
+      this.drawKey(x + 300, y,       color, 'f', 'Fullscreen');
+      this.drawKey(x + 300, y + 50,  color, 'c', 'Color');
+      this.drawKey(x + 300, y + 100, color, 'l', 'Loop');
+      this.drawKey(x + 300, y + 150, color, 'g', 'Grid');
+      this.drawKey(x + 300, y + 200, color, 'r', 'Reset Settings');
 
       this.drawSpacebar(x, y + 200, color, 'Space', 'Pause');
+
       this.drawArrowKeys(x + 150, y + 200, color, 'Movement');
+
+      var creditWidth = 180;
+      var creditX = (this.canvas.width - creditWidth) / 2;
+      this.drawCredit(creditX, y + 400, color, 'Thomas Soria');
 
       strokeWeight(settings.borderWidth);
    }
