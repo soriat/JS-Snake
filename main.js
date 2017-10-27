@@ -88,21 +88,19 @@ function draw() {
    }
 
    snake.draw();
-   edibles.draw();
 
    if (game.state == 'Paused') {
-      game.drawPaused();
-   } else {
-      if (game.currentFrame % settings.gameSpeed === 0) {
-         snake.update();
-         edibles.update();
-      }
+      game.drawSettings();
+   } else if (game.currentFrame % settings.gameSpeed === 0) {
+      snake.update();
+      edibles.update();
    }
 
    if (game.state == 'Settings') {
-      game.drawMenu();
+      game.drawSettings();
+   } else {
+      edibles.draw();
    }
-
 
    game.currentFrame = frameCount % 60;
 }

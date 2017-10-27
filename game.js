@@ -67,15 +67,6 @@ class Game {
       this.state = this.isPaused() ? 'Active' : 'Paused';
    }
 
-   drawPaused() {
-      textAlign(CENTER);
-
-      textSize(25);
-      fill(255, 0, 100);
-      text("(Paused)", 0, this.canvas.height / 2, this.canvas.width, 50);
-   }
-
-
    drawKeyPair(x, y, color, t1, t2, title) {
       textSize(20);
 
@@ -180,7 +171,7 @@ class Game {
       text(name, x, y);
    }
 
-   drawMenu() {
+   drawSettings() {
       strokeWeight(1);
       textFont('Courier New');
 
@@ -199,9 +190,15 @@ class Game {
       var x = (this.canvas.width - menuWidth) / 2;
       var y = (this.canvas.height - menuHeight) / 2;
 
-      var titleWidth = 215;
-      var titleX = (this.canvas.width - titleWidth) / 2;
-      this.drawTitle(titleX, y - 150, color, 'Henry Clay', 'The Friendly Snake');
+      if (this.state == 'Settings') {
+         var titleWidth = 215;
+         var titleX = (this.canvas.width - titleWidth) / 2;
+         this.drawTitle(titleX, y - 150, color, 'Henry Clay', 'The Friendly Snake');
+      } else {
+         var titleWidth = 108 + 14 * 2;
+         var titleX = (this.canvas.width - titleWidth) / 2;
+         this.drawTitle(titleX, y - 150, color, 'Paused', '');
+      }
 
       this.drawKeyPair(x, y,  color, 'S', 's', '+/- Speed');
       this.drawKeyPair(x, y + 50,  color, 'B', 'b', '+/- Block Size');
