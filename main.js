@@ -10,7 +10,7 @@ function setup() {
 }
 
 function mousePressed() {
-   snake.queued = 100;
+   //snake.queued = 100;
 }
 
 function keyPressed() {

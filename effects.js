@@ -1,7 +1,7 @@
 function getThemes() {
    return [
-      'rainbow',
       'pastel',
+      'rainbow',
       'vipera',
       'sky',
       'fire',
