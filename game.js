@@ -81,7 +81,7 @@ class Game {
       textAlign(CENTER);
       textSize(25);
       text(t1, x + 18, y + 25);
-      text(t2, x + 57, y + 26);
+      text(t2, x + 58, y + 26);
    }
 
    drawKey(x, y, color, t1, title) {
