@@ -97,7 +97,7 @@ class Snake {
          this.tail.shift();
       } else {
          this.queued--;
-         if (game.state == 'Active') {
+         if (false && game.state == 'Active') {
             settings.updateParams();
          }
       }
