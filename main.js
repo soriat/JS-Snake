@@ -92,11 +92,15 @@ function draw() {
 
    if (!settings.loopEnabled) {
       stroke(settings.colors[snake.tail.length % settings.colors.length]);
+      strokeWeight(2);
+
       line(0, 0, 0, height);
       line(0, 0, width, 0);
       line(width, height, width, 0);
       line(width, height, 0, height);
+
       stroke(0);
+      strokeWeight(settings.borderWidth);
    }
 
    if (game.state == 'Paused') {
