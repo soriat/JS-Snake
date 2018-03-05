@@ -79,16 +79,25 @@ function draw() {
    background(20);
 
    if (settings.gridEnabled) {
-      for (var x = 0; x < game.cols; x++) {
+      for (var x = 0; x <= game.cols; x++) {
          line(x * settings.blockSize, 0, x * settings.blockSize, height);
       }
 
-      for (var y = 0; y < game.rows; y++) {
+      for (var y = 0; y <= game.rows; y++) {
          line(0, y * settings.blockSize, width,  y * settings.blockSize);
       }
    }
 
    snake.draw();
+
+   if (!settings.loopEnabled) {
+      stroke(settings.colors[snake.tail.length % settings.colors.length]);
+      line(0, 0, 0, height);
+      line(0, 0, width, 0);
+      line(width, height, width, 0);
+      line(width, height, 0, height);
+      stroke(0);
+   }
 
    if (game.state == 'Paused') {
       game.drawSettings();
